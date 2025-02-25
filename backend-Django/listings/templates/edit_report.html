@@ -1,0 +1,28 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+<h1>{{ title }}</h1>
+<form method="post" id="report-edit-form">
+    {% csrf_token %}
+    <textarea name="content" rows="20" style="width: 100%; font-family: monospace;">{{ report_content }}</textarea>
+    <br>
+    <button type="submit" class="button">Save Changes</button>
+</form>
+<script>
+    const form = document.getElementById("report-edit-form");
+    form.addEventListener("submit", function(event) {
+        event.preventDefault();
+        fetch("", {
+            method: "POST",
+            body: new FormData(form),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert(data.message);
+            } else {
+                alert("An error occurred while saving the report.");
+            }
+        });
+    });
+</script>
+{% endblock %}

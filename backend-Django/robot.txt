@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /settings.py
+Disallow: /admin/settings/
+Disallow: /admin/login/

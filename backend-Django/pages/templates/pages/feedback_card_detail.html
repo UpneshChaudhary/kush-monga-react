@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ feedback_card.title }} Details{% endblock %}
+
+{% block content %}
+<style>
+    .contain {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh; /* Ensure a minimum height of the container */
+    }
+
+    .feedback-card {
+        border: 2px solid #4F7942;
+        border-radius: 8px;
+        overflow: hidden;
+        width: 700px;
+        margin-bottom: 20px; /* Add margin to the bottom of the card */
+    }
+
+    .card-image {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .card-content {
+        padding: 15px;
+    }
+
+    h2 {
+        margin-top: 0;
+    }
+
+    .review-detail {
+        margin-top: 0;
+    }
+</style>
+
+<div class="contain">
+    <div class="feedback-card">
+        <img src="{{ feedback_card.photo.url }}" alt="{{ feedback_card.title }}" class="card-image">
+        <div class="card-content">
+            <h3>{{ feedback_card.title }}</h3>
+            <p class="card-text"><i class="fas fa-bed"></i> Bedrooms: {{ feedback_card.bedrooms }}</p>
+            <p class="card-text"><i class="fas fa-bath"></i> Bathrooms: {{ feedback_card.bathrooms }}</p>
+            <p class="card-text"><i class="fas fa-car"></i> Garage: {{ feedback_card.garage }}</p>
+            <div class="row py-2 text-secondary">
+                  <div class="col-12">
+                    <i class="fas fa-user"></i> Owner: {{ feedback_card.Owner }}
+                  </div>
+                </div>
+            <hr>
+            <!-- <p><h5>{{ feedback_card.review_title }}</h5></p> -->
+            <div class="review-detail">
+                <h6>{{ feedback_card.review_detail |safe }}</h6>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

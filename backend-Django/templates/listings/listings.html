@@ -1,0 +1,146 @@
+{% extends 'base.html' %} {% load humanize %} 
+
+{% block meta_description %}
+Discover the latest listings of properties for sale on our website's 'Listed Properties' page.
+ Explore a diverse range of homes, apartments, and more, all meticulously curated for your convenience.
+  Find your dream Home today!.
+{% endblock %}
+
+{% block title %} | Browse Property Listings {% endblock %}
+
+{% block content %}
+
+<section id="showcase-innerr" class="py-5 text-white" style="background-image: url('{{ about_section.background_image2.url }}'); background-size: cover; background-position: center; background-repeat: no-repeat; border-radius: 8px; margin-bottom: 20px; height: 300px;">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-12">
+        <h1 class="display-4">CURRENT LISTING</h1>
+        <p class="lead">
+          View Our Listed Properties
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Breadcrumb -->
+<section id="bc" class="mt-3">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'index' %}"> <i class="fas fa-home"></i> Home</a>
+        </li>
+        <li class="breadcrumb-item active">Browse Listings</li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<!-- Listings -->
+<section id="listings" class="py-4">
+  <div class="container">
+    <div class="row">
+      {% if listings %} {% for listing in listings %}
+
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card listing-preview">
+          <img class="card-img-top" src="{{ listing.photo_main.url }}" style="width: 100%; height: 260px;">
+          <div class="card-img-overlay">
+            <h2>
+              <span class="badge badge-secondary text-white"
+                >{{ listing.price | safe }}</span
+              >
+            </h2>
+          </div>
+          <div class="card-body">
+            <div class="listing-heading text-center">
+              <h4 class="text-primary">{{ listing.title }}</h4>
+              <p>
+                <i class="fas fa-map-marker text-secondary"></i>
+                {{ listing.city }} {{ listing.state }} {{ listing.zipcode }}
+              </p>
+            </div>
+            <hr />
+            <div class="row py-2 text-secondary">
+              <div class="col-6">
+                <i class="fas fa-th-large"></i> Area: {{ listing.sqft }} sq.m
+              </div>
+              <div class="col-6">
+                <i class="fas fa-car"></i> Garage: {{ listing.garage }}
+              </div>
+            </div>
+            <div class="row py-2 text-secondary">
+              <div class="col-6">
+                <i class="fas fa-bed"></i> Bedrooms: {{ listing.bedrooms }}
+              </div>
+              <div class="col-6">
+                <i class="fas fa-bath"></i> Bathrooms: {{ listing.bathrooms }}
+              </div>
+            </div>
+            <hr />
+            
+            <div class="row text-secondary pb-2">
+              
+            </div>
+            <a
+              href="{% url 'listing' listing.slug %}"
+              class="btn btn-primary btn-block" style="background-color: #03396c;"
+              >More Info</a
+            >
+          </div>
+        </div>
+      </div>
+      {% endfor %} {% else %}
+      <div class="col-md-12">
+        <p>No Listings Available</p>
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        {% if listings.has_other_pages %}
+        <ul class="pagination">
+          {% if listings.has_previous %}
+          <li class="page-item" style="background-color: #03396c;">
+            <a
+              href="?page={{ listings.previous_page_number }}"
+              class="page-link" style="background-color: #03396c;"
+              >&laquo;</a
+            >
+          </li>
+          {% else %}
+          <li class="page-item disabled">
+            <a class="page-link" style="background-color: #03396c;">&laquo;</a>
+          </li>
+          {% endif %}
+           {% for i in listings.paginator.page_range %}
+           {% if listings.number == i %}
+          <li class="page-item active">
+            <a class="page-link">{{ i }}</a>
+          </li>
+          {% else %}
+          <li class="page-item" style="background-color: #03396c;">
+            <a href="?page={{ i }}" class="page-link">{{ i }}</a>
+          </li>
+          {% endif %}
+           {% endfor %} 
+          {% if listings.has_next %}
+          <li class="page-item">
+            <a href="?page={{ listings.next_page_number }}" class="page-link" style="background-color: #03396c;"
+              >&raquo;</a
+            >
+          </li>
+          {% else %}
+          <li class="page-item disabled">
+            <a class="page-link" style="background-color: #03396c;">&raquo;</a>
+          </li>
+          {% endif %}
+        </ul>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

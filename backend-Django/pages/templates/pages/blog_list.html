@@ -1,0 +1,247 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block meta_description %}
+Explore insightful articles on real estate trends, tips, and advice. 
+ Stay updated with the latest news and developments in the housing market.
+ Whether you're buying, selling, or investing, our blog provides valuable information to guide you through your real estate journey.
+{% endblock %}
+
+{% block title %} | Blogs {% endblock %}
+
+{% block content %}
+
+<section id="showcase-innerr" class="py-5 text-white" style="background-image: url('{{ about_section.background_image2.url }}');
+background-size: cover; background-position: center; background-repeat: no-repeat; border-radius: 8px; margin-bottom: 20px; height: 300px;">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-12">
+                <h1 class="display-4">
+                    <span class="font-weight-bold">Real Estate Blogs</span>
+                </h1>
+                <p class="lead">
+                    Find Our Latest Blogs
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="blog" class="blog-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-7">
+                {% for blog in blogs %}
+                <div class="blog_2">
+                    <h3>{{ blog.title }}</h3>
+                    <a href="{% url 'blog_detail' blog.id %}"><img src="{{ blog.image.url }}" alt="{{ blog.title }}" class="img_responsive"></a>
+                    <p>{{ blog.content | safe }}</p>
+                    <a href="{% url 'blog_detail' blog.id %}" class="button">Read more <i class="fa fa-long-arrow-right"></i></a>
+                </div>
+                {% endfor %}
+                <div class="blog_3">
+                    <ul class="pagination">
+                        {% if blogs.has_previous %}
+                        <li class="well_3"><a href="?page={{ blogs.previous_page_number }}">Previous</a></li>
+                        {% endif %}
+                        {% for num in blogs.paginator.page_range %}
+                        {% if blogs.number == num %}
+                        <li class="well_22">{{ num }}</li>
+                        {% elif num > blogs.number|add:'-5' and num < blogs.number|add:'5' %}
+                        <li class="well_3"><a href="?page={{ num }}">{{ num }}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                        {% if blogs.has_next %}
+                        <li class="well_3"><a href="?page={{ blogs.next_page_number }}">Next</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <div class="blog_4">
+                    <h3>Recent posts</h3>
+                </div>
+                {% for recent in recent_posts %}
+                <div class="blog_5 clearfix">
+                    <div class="col-sm-4 space_all">
+                        <div class="blog_6">
+                            <a href="#"><img src="{{ recent.image.url }}" alt="{{ recent.title }}" class="img_responsive"></a>
+                        </div>
+                    </div>
+                    <div class="col-sm-8 space_all">
+                        <div class="blog_7">
+                            <h5><a href="{% url 'blog_detail' recent.id %}">{{ recent.title }}</a></h5>
+                            <h6>{{ recent.content | safe }}</h6>
+                            <p><a href="{% url 'blog_detail' recent.id %}">Read More</a></p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+/* Styles for blog section */
+.blog-section {
+    padding: 60px 0;
+}
+
+.blog_2 {
+    margin-bottom: 30px;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 15px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.blog_2:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.blog_2 img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.blog_2 img:hover {
+    transform: scale(1.05);
+}
+
+.blog_2 h3 {
+    color: #333;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+.blog_2 h3:hover {
+    color: #03396c;
+}
+
+.blog_2 p {
+    color: #555;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.blog_2 .button {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #03396c;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s ease-in-out;
+}
+
+.blog_2 .button:hover {
+    background: #03396c;
+}
+
+/* Pagination styles */
+.pagination {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.pagination .well_3 a,
+.pagination .well_3 span {
+    margin: 0 5px;
+    padding: 10px 15px;
+    background: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    color: #333;
+    text-decoration: none;
+}
+
+.pagination .well_3 a:hover {
+    background: #03396c;
+    color: #fff;
+    border-color: #03396c;
+}
+
+.pagination .well_22 {
+    background: #03396c;
+    color: #fff;
+    border-color: #03396c;
+    padding: 10px 15px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+/* Recent blogs styles */
+.blog_4 {
+    margin-bottom: 20px;
+}
+
+.blog_4 h3 {
+    font-weight: bold;
+    color: #333;
+}
+
+.blog_5 {
+    margin-bottom: 15px;
+    display: flex;
+}
+
+.blog_6 img {
+    margin-top: 10px;
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.blog_6 img:hover {
+    transform: scale(1.05);
+}
+
+.blog_7 h5 a {
+    color: #03396c;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+.blog_7 h5 a:hover {
+    color: #03396c;
+}
+
+.blog_7 h6 {
+    color: #555;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.blog_7 p a {
+    color: #03396c;
+    text-decoration: none;
+}
+
+.blog_7 p a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .blog_5 {
+        flex-direction: column;
+    }
+    .blog_6, .blog_7 {
+        text-align: center;
+    }
+    .col-sm-7, .col-sm-5 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+</style>
+
+{% endblock %}

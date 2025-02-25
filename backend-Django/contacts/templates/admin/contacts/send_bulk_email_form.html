@@ -1,0 +1,12 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+  <div class="app-contacts module">
+    <form method="post" action="{% url 'send_bulk_email' %}">
+      {% csrf_token %}
+      <h2>Send Bulk Email</h2>
+      {{ form.as_p }}
+      <input type="submit" name="send_email" value="Send Email">
+    </form>
+  </div>
+{% endblock %}

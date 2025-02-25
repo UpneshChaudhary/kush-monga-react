@@ -1,0 +1,1335 @@
+{% extends 'base.html' %} {% load static %}
+
+{% block meta_description %}
+Discover the best in Australian real estate with Khush Monga (Real Estate Agent).
+ Explore listed for sale and sold properties, client feedback, virtual tours and captivating YouTube videos.
+  Trust Khush Monga for your real estate needs.
+{% endblock %}
+
+{% load humanize %}
+{% block title %} | Home {% endblock %}
+{% block content%}
+
+<!-- alerts -->
+
+
+
+<!-- Showcase Section with Background Image -->
+<section id="showcaseee" style="background-image: url('{{ about_section.background_image2.url }}'); background-size: cover; background-position: center; padding-top: 200px; padding-bottom: 100px;">
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-md-12" style="margin-bottom: 40px; padding-top: 0px;"> <!-- Adjust the padding-top as needed -->
+        <h2 class="display-4 text-white mb-2">Unlock Your Dream Home with Khush Monga</h2>
+        <h3 class="text-white mb-4">Your Trusted Real Estate Partner</h3>
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#registrationModal" style="background-color: #03396c;">Register With Us</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+<!-- Registration Modal -->
+<div class="modal fade" id="registrationModal" tabindex="-1" role="dialog" aria-labelledby="registrationModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="registrationModalLabel">Register With Us</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Registration form -->
+        <form action="{% url 'register_user' %}" method="post">
+          {% csrf_token %}
+          <div class="form-group">
+              <input type="text" class="form-control" id="name" name="name" placeholder="Enter Your Name" required>
+          </div>
+          <div class="form-group">
+              <input type="email" class="form-control" id="email" name="email" placeholder="Enter Your Email" required>
+          </div>
+          <div class="form-group">
+               <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter Your Phone Number" pattern="[0-9]+" required>
+               <!-- pattern="[0-9]+" enforces only numeric input -->
+          </div>
+          <div class="form-group">
+              <select class="form-control" id="purpose" name="purpose" required>
+                  <option value="" selected disabled>Select Purpose</option>
+                  <option value="buy">Buy</option>
+                  <option value="sell">Sell</option>
+              </select>
+          </div>
+          <div class="form-group">
+              <textarea class="form-control" id="description" name="description" placeholder="Enter description" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-block" style="background-color: #03396c; color: white;">Register</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Script for Select Purpose -->
+<script>
+  document.getElementById('purpose').addEventListener('change', function() {
+    const selectedValue = this.value;
+    document.getElementById('selectedPurpose').value = selectedValue;
+  });
+</script>
+
+
+
+
+
+
+
+
+
+<section id="team" class="py-5" style="background-color: #f8f9fa;">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-12" style="color: black;">
+        <h2>Khush Monga</h2>
+        <div class="row">
+          <div class="col-md-4">
+            <img src="{{ about_section.agent_image.url }}" alt="" class="rounded-circle mb-4" />
+            <p class="text-success">
+              <h5> Sales Consultant </h5>
+            </p>
+            <hr>
+            <p><i class="fas fa-phone" style="color: #03396c;"></i><a href="tel:{{ realtor.phone }}" style="color: #03396c;"> 0411 094 249</a></p>
+            <a href="mailto:{{ realtor.email }}" style="color: #03396c;">
+              <i class="fas fa-envelope-open"></i> Khush@baileydevine.com.au
+            </a>
+          </div>
+          <div class="col-md-8">
+            <!-- Description -->
+            <br><br>
+            <p style="text-align: justify; color: black;">
+              Khush Monga is a dedicated real estate professional based in Perth, WA. With a wealth of experience in the local market, she specializes in guiding clients through dynamic real estate goals and consistently delivers outstanding results across Piara Waters, Harrisdale, Southern Rivers, Success, and neighbouring suburbs of Perth.
+
+ 
+
+              Khush's unwavering commitment to integrity and comprehensive market knowledge make her your trusted partner in achieving your real estate goals. Her exceptional skills have earned explicit recognition from esteemed entities like the Real Estate Institute of Western Australia (REIWA) and numerous prestigious awards, a true testament to her years of dedication and outstanding contributions to the industry.
+            </p>
+            <br><!-- Home open cards-->
+            
+              
+            
+            
+          </div>
+          
+          </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% if home_open_events %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Upcoming Home Opens</h2>
+  
+    <div class="row">
+        {% for event in home_open_events %}
+            <div class="col-lg-4 col-md-6 mb-4 d-flex align-items-stretch">
+                <div class="card shadow-sm h-100">
+                    <img class="card-img-top" src="{{ event.image.url }}" alt="{{ event.title }}" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ event.title }}</h4>
+                        <p class="card-text"><i class="fas fa-map-marker-alt"></i> {{ event.address }}</p>
+                        <p class="card-text" style="color: #e74c3c;"><strong>{{ event.day }}, {{ event.start_time }} - {{ event.end_time }}</strong></p>
+
+                        <!-- Google Calendar -->
+                        <a href="https://www.google.com/calendar/render?action=TEMPLATE&text={{ event.title }}&dates={{ event.date|date:'Ymd' }}T{{ event.start_time|time:'His' }}/{{ event.date|date:'Ymd' }}T{{ event.end_time|time:'His' }}&details=Visit+{{ event.address }}+for+an+open+house.&location={{ event.address }}"
+                          target="_blank" class="btn btn-primary" style="background-color: #022c54;">Add to Calendar</a>
+
+
+
+                        <!-- Outlook Calendar
+                        <a href="https://outlook.live.com/owa/?path=/calendar/action/compose&startdt={{ event.date }}T{{ event.start_time }}&enddt={{ event.date }}T{{ event.end_time }}&subject=Home+Open+{{ event.title }}&body=Visit+{{ event.address }}+for+an+open+house.&location={{ event.address }}"
+                           target="_blank" class="btn btn-info">Add to Outlook Calendar</a>
+
+                            Yahoo Calendar 
+                        <a href="https://calendar.yahoo.com/?v=60&view=d&type=20&title=Home+Open+{{ event.title }}&st={{ event.date }}T{{ event.start_time|time:'Hi' }}&et={{ event.date }}T{{ event.end_time|time:'Hi' }}&desc=Visit+{{ event.address }}+for+an+open+house.&in_loc={{ event.address }}"
+                           target="_blank" class="btn btn-warning">Add to Yahoo Calendar</a>  -->
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+
+
+
+<style>
+  .card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    color: #03396c;
+}
+
+</style>
+
+
+<!-- Coming Soon Properties -->
+
+<div class="container mt-4">
+  {% if coming_soon_properties %}
+      <h2 class="text-center">Coming Soon Properties</h2>
+      <div class="row">
+          {% for property in coming_soon_properties %}
+              <div class="col-md-4">
+                  <div class="card mb-4">
+                      <img class="card-img-top" src="{{ property.image.url }}" alt="{{ property.title }}" style="width:100%; height:auto;">
+                      <div class="card-body">
+                          <h3 class="card-title text-center">{{ property.title }}</h3>
+                          <div class="row">
+                              <!-- <div class="col-6">
+                                  <p class="card-text"><strong>Bedrooms:</strong> {{ property.bedrooms }}</p>
+                                  <p class="card-text"><strong>Carspace:</strong> {{ property.carspace }}</p>
+                              </div>
+                              <div class="col-6">
+                                  <p class="card-text"><strong>Bathrooms:</strong> {{ property.bathrooms }}</p>
+                                  <p class="card-text"><strong>Area:</strong> {{ property.area }} sqm</p>
+                              </div> -->
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          {% endfor %}
+      </div>
+  {% endif %}
+</div>
+
+<style>
+  .card-img-top {
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+    color: #03396c;
+    margin-bottom: 1rem;
+  }
+
+  .card-text {
+    margin-bottom: 0.5rem;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+</style>
+
+
+
+
+
+
+
+
+<section class="section-property section-t8">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="title-wrap d-flex justify-content-between">
+          <div class="title-box">
+            <h2 class="title-a">Latest Listings</h2>
+          </div>
+          
+          
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      {% for listing in listings %}
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card-box-a card-shadow">
+              <div class="img-box-a">
+                <img src="{{ listing.photo_main.url }}" alt="" class="img-a img-fluid" style="height: 400px;">
+              </div>
+              <div class="card-overlay">
+                <div class="card-overlay-a-content">
+                  <div class="card-header-a">
+                    <h2 class="card-title-a">
+                      <a href="{% url 'listing' listing.slug %}">{{ listing.title }}
+                        <br /> </a>
+                    </h2>
+                  </div>
+                  <div class="card-body-a">
+                    <div class="price-box d-flex">
+                      <span class="price-a"> {{ listing.price | safe }}</span>
+                    </div>
+                    <a href="{% url 'listing' listing.slug %}" class="link-a" style="color: #f8f9fa;">Click here to view
+                      <span class="ion-ios-arrow-forward"></span>
+                    </a>
+                  </div>
+                  <div class="card-footer-a">
+                    <ul class="card-info d-flex justify-content-around">
+                      <li>
+                        <h4 class="card-info-title" style="color:#f8f9fa;">Area</h4>
+                        <span>{{listing.sqft}}m<sup>2</sup></span>
+                      </li>
+                      <li>
+                        <h4 class="card-info-title" style="color:#f8f9fa;">Beds</h4>
+                        <span>{{ listing.bedrooms }}</span>
+                      </li>
+                      <li>
+                        <h4 class="card-info-title" style="color:#f8f9fa;">Baths</h4>
+                        <span>{{ listing.bathrooms }}</span>
+                      </li>
+                      <li>
+                        <h4 class="card-info-title" style="color:#f8f9fa;">Garages</h4>
+                        <span>{{ listing.garage }}</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+    </div>
+    <div class="title-link">
+      <a href="{% url 'listings' %}" class="all-listings-btn">View all Listings<span class="ion-ios-arrow-forward"></span></a>
+    </div>
+  </div>
+</section>
+
+<style>
+  /*------/ Owl carousel /------*/
+
+.owl-theme .owl-dots {
+  text-align: center;
+  margin-top: 18px;
+}
+
+.owl-theme .owl-dots .owl-dot {
+  display: inline-block;
+}
+
+.owl-theme .owl-dots .owl-dot span {
+  width: 16px;
+  height: 9px;
+  margin: 5px 5px;
+  background: #000000;
+  border: 0px solid #000000;
+  display: block;
+  transition: all 0.6s ease-in-out;
+  cursor: pointer;
+  border-radius: 0px;
+}
+
+.owl-theme .owl-dots .owl-dot:hover span {
+  background-color: #03396c;
+}
+
+.owl-theme .owl-dots .owl-dot.active span {
+  background-color: #03396c;
+  width: 35px;
+}
+
+.owl-arrow .owl-nav {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 1.8rem;
+}
+
+.owl-arrow .owl-nav .owl-prev,
+.owl-arrow .owl-nav .owl-next {
+  display: inline-block;
+  transition: all 0.6s ease-in-out;
+  color: #000000;
+}
+
+.owl-arrow .owl-nav .owl-prev.disabled,
+.owl-arrow .owl-nav .owl-next.disabled {
+  transition: all 0.6s ease-in-out;
+  color: #adadad;
+}
+
+.owl-arrow .owl-nav .owl-next {
+  margin-left: 15px;
+}
+
+.nav-arrow-a .owl-arrow .owl-nav {
+  font-size: 1.8rem;
+  margin-top: -110px;
+}
+
+.nav-arrow-a .owl-arrow .owl-nav .owl-next {
+  margin-left: 15px;
+}
+
+.nav-arrow-b .owl-arrow .owl-nav {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 1.2rem;
+}
+
+.nav-arrow-b .owl-arrow .owl-nav .owl-prev,
+.nav-arrow-b .owl-arrow .owl-nav .owl-next {
+  padding: .7rem 1.5rem !important;
+  display: inline-block;
+  transition: all 0.6s ease-in-out;
+  color: #ffffff;
+  background-color: #03396c;
+  opacity: .9;
+}
+
+.nav-arrow-b .owl-arrow .owl-nav .owl-prev.disabled,
+.nav-arrow-b .owl-arrow .owl-nav .owl-next.disabled {
+  transition: all 0.6s ease-in-out;
+  color: #ffffff;
+}
+
+.nav-arrow-b .owl-arrow .owl-nav .owl-prev:hover,
+.nav-arrow-b .owl-arrow .owl-nav .owl-next:hover {
+  background-color: #03396c;
+}
+
+.nav-arrow-b .owl-arrow .owl-nav .owl-next {
+  margin-left: 0px;
+}
+
+
+
+
+.card-box-a,
+.card-box-b,
+.card-box-d {
+  position: relative;
+  overflow: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.card-box-a .img-a,
+.card-box-a .img-b,
+.card-box-b .img-a,
+.card-box-b .img-b {
+  transition: .8s all ease-in-out;
+}
+
+.card-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.card-shadow {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.card-shadow:before {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 27%, rgba(0, 0, 0, 0.65) 90%);
+}
+
+/*======================================
+//--//-->   PROPERTY - CARD-A
+======================================*/
+
+.card-overlay-a-content {
+  transition: all .5s ease-in;
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  z-index: 2;
+}
+
+.card-header-a {
+  padding: 0 1rem;
+}
+
+.card-header-a .card-title-a {
+  color: #ffffff;
+  margin-bottom: 0;
+  padding-bottom: .7rem;
+}
+
+.card-header-a .card-title-a a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.card-body-a {
+  z-index: 2;
+  transition: all .5s ease-in;
+  padding: 0rem 1rem 2rem 1rem;
+}
+
+.card-body-a .price-box {
+  padding-bottom: .5rem;
+}
+
+.price-a {
+  color: #ffffff;
+  padding: .6rem .8rem;
+  border: 2px solid #03396c;
+  border-radius: 50px;
+  text-transform: uppercase;
+  letter-spacing: 0.030em;
+}
+
+.card-footer-a {
+  width: 100%;
+  position: absolute;
+  z-index: 2;
+  background-color: #03396c;
+}
+
+.card-info {
+  list-style: none;
+  margin-bottom: 0;
+  padding: .5rem 0;
+}
+
+.card-info .card-info-title {
+  font-size: 1rem;
+  color: #313131;
+}
+
+.card-info li span {
+  color: #ffffff;
+  font-size: .9rem;
+}
+
+/*------/ Property Grid /-----*/
+
+.property-grid .grid-option {
+  text-align: right;
+  margin-bottom: 2rem;
+}
+
+.property-grid .grid-option .custom-select {
+  border-radius: 0;
+  width: 200px;
+  border-color: #313131;
+}
+
+.property-grid .grid-option .custom-select:hover,
+.property-grid .grid-option .custom-select:active,
+.property-grid .grid-option .custom-select:focus {
+  border-color: #313131;
+}
+
+.property-grid .grid-option .custom-select option {
+  border-color: #313131;
+}
+
+/*------/ Property Single /-----*/
+
+.gallery-property {
+  margin-bottom: 3rem;
+}
+
+.property-price {
+  margin: 0 auto;
+}
+
+.property-price .card-header-c {
+  padding: 0;
+}
+
+.summary-list {
+  padding-right: 1rem;
+  color: #000000;
+}
+
+.summary-list .list {
+  padding: 0;
+  line-height: 2;
+}
+
+.summary-list .list span {
+  color: #555555;
+}
+
+.property-agent .title-agent {
+  font-weight: 600;
+}
+
+.property-agent ul {
+  line-height: 2;
+  color: #000000;
+}
+
+.property-agent .socials-a {
+  text-align: center;
+}
+
+
+@media (min-width: 576px) {
+  .intro .intro-title {
+    font-size: 3.5rem;
+  }
+
+  .intro .intro-subtitle.intro-price {
+    font-size: 1.3rem;
+  }
+
+  .about-img-box {
+    padding-left: 4rem;
+  }
+
+  .sinse-box {
+    padding: 1.5rem 2.5rem;
+    bottom: 20px;
+  }
+
+  .sinse-box .sinse-title {
+    font-size: 1.3rem;
+  }
+
+  .sinse-box p {
+    font-size: .8rem;
+  }
+
+  .sinse-box p {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .link-a {
+    font-size: .9rem;
+  }
+
+  .link-a span {
+    font-size: 1.5rem;
+  }
+
+  .navbar-default.navbar-trans .nav-item,
+  .navbar-default.navbar-reduce .nav-item {
+    margin-left: 15px;
+  }
+
+  .navbar-default .dropdown .dropdown-menu {
+    border-top: 4px solid #03396c;
+    border-left: 0;
+    display: block;
+    position: absolute;
+    box-shadow: 0 2px rgba(17, 16, 15, 0.1), 0 2px 10px rgba(20, 19, 18, 0.1);
+  }
+
+  .box-collapse {
+    width: 50%;
+  }
+
+  .intro .owl-theme .owl-dots {
+    right: 200px;
+  }
+
+  .intro .intro-body {
+    padding-left: 2rem;
+  }
+
+  .intro .intro-title-top {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .intro .intro-title {
+    font-size: 4rem;
+  }
+
+  .intro .intro-subtitle {
+    font-size: 2.5rem;
+  }
+
+  .intro .intro-subtitle.intro-price {
+    padding-top: 2rem;
+    font-size: 1.5rem;
+  }
+
+  .intro-single .title-single-box .title-single {
+    font-size: 2.1rem;
+  }
+
+  .grid .card-box-a,
+  .grid .card-box-b,
+  .grid .card-box-c,
+  .grid .card-box-d {
+    margin-bottom: 2.5rem;
+  }
+
+  .card-box-a:hover .img-a,
+  .card-box-a:hover .img-b,
+  .card-box-b:hover .img-a,
+  .card-box-b:hover .img-b {
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+  }
+
+  .card-box-a .price-a,
+  .card-box-b .price-a {
+    font-size: .9rem;
+  }
+
+  .card-box-a:hover .card-overlay-a-content {
+    bottom: 60px;
+  }
+
+  .card-box-a:hover .card-body-a {
+    padding-bottom: 1rem;
+  }
+
+  .card-overlay-a-content {
+    bottom: -20px;
+  }
+
+  .card-header-a .card-title-a {
+    font-size: 1.3rem;
+  }
+
+  .card-info .card-info-title {
+    font-size: .9rem;
+  }
+
+  .card-info li span {
+    font-size: .8rem;
+  }
+
+  .card-header-b {
+    bottom: 0px;
+  }
+
+  .card-header-b .title-2 {
+    font-size: 1rem;
+  }
+
+  .card-header-b .date-b {
+    font-size: .9rem;
+  }
+
+  .box-comments .list-comments .comment-author {
+    font-size: 1.5rem;
+  }
+
+  .title-c {
+    font-size: 1.8rem;
+  }
+
+  .card-box-d .card-overlay-hover {
+    padding: 5px 15px 5px 10px;
+  }
+
+  .card-box-d .title-d {
+    font-size: 1.1rem;
+    margin: .5rem 0;
+  }
+
+  .card-box-d .content-d {
+    font-size: .8rem;
+    margin: .5rem 0;
+  }
+
+  .card-box-d .card-body-d p {
+    margin-bottom: 8px;
+    font-size: .8rem;
+  }
+
+  .about-img-box {
+    padding-left: 5rem;
+  }
+
+  .sinse-box {
+    padding: 1.5rem 3rem;
+  }
+
+  .sinse-box .sinse-title {
+    font-size: 1.8rem;
+  }
+}
+
+@media (min-width: 768px) and (min-width: 768px) {
+  .card-box-a:hover .card-overlay-a-content {
+    bottom: 60px;
+  }
+}
+
+@media (min-width: 768px) and (min-width: 992px) {
+  .card-box-a:hover .card-overlay-a-content {
+    bottom: 64px;
+  }
+}
+
+@media (min-width: 992px) {
+  .link-a {
+    font-size: 1rem;
+  }
+
+  .link-a span {
+    font-size: 18px;
+  }
+
+  .list-a li {
+    width: 33.333%;
+  }
+
+  .intro .intro-title-top {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .intro .intro-title {
+    font-size: 4.5rem;
+  }
+
+  .intro .intro-subtitle.intro-price {
+    padding-top: 3rem;
+  }
+
+  .intro-single .title-single-box .title-single {
+    font-size: 2.5rem;
+  }
+
+  .card-box-a .price-a,
+  .card-box-b .price-a {
+    font-size: 1rem;
+  }
+
+  .card-overlay-a-content {
+    bottom: 0px;
+  }
+
+  .card-header-a .card-title-a {
+    font-size: 2rem;
+  }
+
+  .card-info .card-info-title {
+    font-size: 1rem;
+  }
+
+  .card-info li span {
+    font-size: 1rem;
+  }
+
+  .card-header-b {
+    bottom: 20px;
+  }
+
+  .card-header-b .title-2 {
+    font-size: 1.6rem;
+  }
+
+  .card-header-b .date-b {
+    font-size: 1rem;
+  }
+
+  .title-c {
+    font-size: 2.5rem;
+  }
+
+  .card-box-d .card-overlay-hover {
+    padding: 5px 40px 5px 35px;
+  }
+
+  .card-box-d .title-d {
+    font-size: 1.5rem;
+    margin: 1rem 0;
+  }
+
+  .card-box-d .card-body-d p {
+    margin-bottom: 12px;
+    font-size: 1rem;
+  }
+
+  .sinse-box {
+    padding: 3rem 4.5rem;
+  }
+
+  .sinse-box .sinse-title {
+    font-size: 2.2rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .card-box-d .card-overlay-hover {
+    padding: 15px 40px 5px 35px;
+  }
+
+  .card-box-d .title-d {
+    font-size: 2rem;
+    margin: 1rem 0;
+  }
+}
+
+@media (max-width: 991px) {
+  .property-contact {
+    margin-top: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .back-to-top {
+    bottom: 15px;
+  }
+}
+
+@media (max-width: 767px) {
+  .text-brand {
+    font-size: 1.8rem;
+  }
+
+  .section-t8 {
+    padding-top: 4rem;
+  }
+
+  .section-t4 {
+    padding-top: 2rem;
+  }
+
+  .section-md-t3 {
+    padding-top: 3rem;
+  }
+
+  .section-tb85 {
+    padding: 4rem 0 2.5rem 0;
+  }
+
+  .intro-single {
+    padding-top: 9rem;
+  }
+
+  .card-box-a,
+  .card-box-b,
+  .card-box-c,
+  .card-box-d {
+    margin-bottom: 2.5rem;
+  }
+
+  .card-box-a .card-overlay-a-content {
+    bottom: 65px;
+  }
+
+  .card-box-a .card-body-a {
+    padding-bottom: 1rem;
+  }
+
+  .property-agent {
+    margin-top: 2.5rem;
+  }
+
+  .card-box-c {
+    margin-bottom: 2rem;
+  }
+
+  .card-body-c {
+    padding: 0;
+  }
+}
+
+@media (max-width: 575px) {
+  .box-collapse .title-box-d {
+    left: 35px;
+  }
+
+  .box-collapse .title-box-d .title-d {
+    font-size: 1.3rem;
+  }
+}
+
+
+
+
+
+
+</style>
+
+
+<style>
+  .title-link a {
+    display: inline-block;
+    background-color: #03396c;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+
+  .title-link a:hover {
+    background-color: #022b57;
+  }
+  .title-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.all-listings-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #03396c;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+  white-space: nowrap;
+}
+
+.all-listings-btn:hover {
+  background-color: #022c54;
+}
+
+.all-listings-btn .ion-ios-arrow-forward {
+  margin-left: 4px;
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .all-listings-btn {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+  .all-listings-btn .ion-ios-arrow-forward {
+    margin-left: 2px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .all-listings-btn {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+  .all-listings-btn .ion-ios-arrow-forward {
+    margin-left: 1px;
+    font-size: 0.8rem;
+  }
+}
+
+</style>
+
+
+<script>
+  $(document).ready(function(){
+    $('#property-carousel').owlCarousel({
+      loop: false,
+      margin: 10,
+      nav: true,
+      dots: true,
+      responsive: {
+        0: {
+          items: 1
+        },
+        600: {
+          items: 1
+        },
+        1000: {
+          items: 1
+        }
+      }
+    });
+  });
+  
+</script>
+
+
+<br>
+
+<section class="section-property section-t8">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="title-wrap d-flex justify-content-between">
+          <div class="title-box">
+            <h2 class="title-a">Recently Sold</h2>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      {% for sold_listing in latest_sold_properties %}
+      {% if forloop.counter <= 4 %}
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card-box-a card-shadow">
+          <div class="img-box-a">
+            <img src="{{sold_listing.image1.url}}" alt="{{ sold_listing.title }}" class="img-a img-fluid" style="height: 400px;">
+          </div>
+          <div class="card-overlay">
+            <div class="card-overlay-a-content">
+              
+              <div class="card-header-a">
+                <h2 class="card-title-a">
+                  <a href="">{{ sold_listing.title }}
+                    <br></a>
+                </h2>
+              </div>
+              <div class="card-body-a">
+                <div class="price-box d-flex">
+                  <span class="price-a"> {{ sold_listing.price }}</span>
+                </div>
+                {% if sold_listing.slug %}
+                <a href="{% url 'sold_property_detail' slug=sold_listing.slug %}" class="link-a" style="color: #f8f9fa;">Click here to view
+                    <span class="ion-ios-arrow-forward"></span>
+                </a>
+                {% else %}
+                <p>Slug is missing for this property.</p>
+                {% endif %}
+              </div>
+              <div class="card-footer-a">
+                <ul class="card-info d-flex justify-content-around">
+                  <li>
+                    <h4 class="card-info-title" style="color:#f8f9fa;">Area</h4>
+                    <span>{{ sold_listing.sqft }}m
+                      <sup>2</sup>
+                    </span>
+                  </li>
+                  <li>
+                    <h4 class="card-info-title" style="color:#f8f9fa;">Beds</h4>
+                    <span>{{ sold_listing.bedrooms }}</span>
+                  </li>
+                  <li>
+                    <h4 class="card-info-title" style="color:#f8f9fa;">Baths</h4>
+                    <span>{{ sold_listing.bathrooms }}</span>
+                  </li>
+                  <li>
+                    <h4 class="card-info-title" style="color:#f8f9fa;">Garages</h4>
+                    <span>{{ sold_listing.garage }}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+    <div class="title-link">
+      <a href="{% url 'sold_properties' %}" class="all-listings-btn">View all Sold Properties<span class="ion-ios-arrow-forward"></span></a>
+    </div>
+  </div>
+</section>
+<!--/ Sold Property End /-->
+
+
+
+
+
+<section>
+  <div class="container mt-5">
+    <!-- Video Carousel -->
+    <div id="myCarousel" class="carousel slide">
+      <div class="carousel-inner">
+        {% for video_url in video_urls %}
+          <div class="carousel-item {% if forloop.first %}active{% endif %}">
+            <div class="embed-responsive embed-responsive-16by9">
+              <iframe class="embed-responsive-item" src="{{ video_url }}" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+      <ol class="carousel-indicators">
+        {% for video_url in video_urls %}
+          <li data-target="#myCarousel" data-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %}active{% endif %}"></li>
+        {% endfor %}
+      </ol>
+    </div>
+  </div>
+</section>
+
+<br> <br>
+
+<script>
+  // Full-screen functionality
+  document.querySelectorAll('.carousel-item iframe').forEach(function(elem) {
+    elem.setAttribute('allowfullscreen', '');
+    elem.setAttribute('title', 'YouTube video player');
+    elem.setAttribute('frameborder', '0');
+  });
+</script>
+
+<script>
+  (function ($) {
+  "use strict";
+  
+  // Preloader
+  $(window).on('load', function () {
+    if ($('#preloader').length) {
+      $('#preloader').delay(100).fadeOut('slow', function () {
+        $(this).remove();
+      });
+    }
+  });
+
+  // Back to top button
+  $(window).scroll(function() {
+    if ($(this).scrollTop() > 100) {
+      $('.back-to-top').fadeIn('slow');
+    } else {
+      $('.back-to-top').fadeOut('slow');
+    }
+  });
+  $('.back-to-top').click(function(){
+    $('html, body').animate({scrollTop : 0},1500, 'easeInOutExpo');
+    return false;
+  });
+  
+	var nav = $('nav');
+	var navHeight = nav.outerHeight();
+
+	/*--/ ScrollReveal /Easy scroll animations for web and mobile browsers /--*/
+	window.sr = ScrollReveal();
+	sr.reveal('.foo', { duration: 1000, delay: 15 });
+
+	/*--/ Carousel owl /--*/
+	$('#carousel').owlCarousel({
+		loop: true,
+		margin: -1,
+		items: 1,
+		nav: true,
+		navText: ['<i class="ion-ios-arrow-back" aria-hidden="true"></i>', '<i class="ion-ios-arrow-forward" aria-hidden="true"></i>'],
+		autoplay: true,
+		autoplayTimeout: 3000,
+		autoplayHoverPause: true
+	});
+
+	/*--/ Animate Carousel /--*/
+	$('.intro-carousel').on('translate.owl.carousel', function () {
+		$('.intro-content .intro-title').removeClass('zoomIn animated').hide();
+		$('.intro-content .intro-price').removeClass('fadeInUp animated').hide();
+		$('.intro-content .intro-title-top, .intro-content .spacial').removeClass('fadeIn animated').hide();
+	});
+
+	$('.intro-carousel').on('translated.owl.carousel', function () {
+		$('.intro-content .intro-title').addClass('zoomIn animated').show();
+		$('.intro-content .intro-price').addClass('fadeInUp animated').show();
+		$('.intro-content .intro-title-top, .intro-content .spacial').addClass('fadeIn animated').show();
+	});
+
+	/*--/ Navbar Collapse /--*/
+	$('.navbar-toggle-box-collapse').on('click', function () {
+		$('body').removeClass('box-collapse-closed').addClass('box-collapse-open');
+	});
+	$('.close-box-collapse, .click-closed').on('click', function () {
+		$('body').removeClass('box-collapse-open').addClass('box-collapse-closed');
+		$('.menu-list ul').slideUp(700);
+	});
+
+	/*--/ Navbar Menu Reduce /--*/
+	$(window).trigger('scroll');
+	$(window).bind('scroll', function () {
+		var pixels = 50;
+		var top = 1200;
+		if ($(window).scrollTop() > pixels) {
+			$('.navbar-default').addClass('navbar-reduce');
+			$('.navbar-default').removeClass('navbar-trans');
+		} else {
+			$('.navbar-default').addClass('navbar-trans');
+			$('.navbar-default').removeClass('navbar-reduce');
+		}
+		if ($(window).scrollTop() > top) {
+			$('.scrolltop-mf').fadeIn(1000, "easeInOutExpo");
+		} else {
+			$('.scrolltop-mf').fadeOut(1000, "easeInOutExpo");
+		}
+	});
+
+	/*--/ Property owl /--*/
+	$('#property-carousel').owlCarousel({
+		loop: true,
+		margin: 30,
+		responsive: {
+			0: {
+				items: 1,
+			},
+			769: {
+				items: 2,
+			},
+			992: {
+				items: 3,
+			}
+		}
+	});
+
+	/*--/ Property owl owl /--*/
+	$('#property-single-carousel').owlCarousel({
+		loop: true,
+		margin: 0,  
+		nav: true,
+		navText: ['<i class="ion-ios-arrow-back" aria-hidden="true"></i>', '<i class="ion-ios-arrow-forward" aria-hidden="true"></i>'],
+		responsive: {
+			0: {
+				items: 1,
+			}
+		}
+	});
+
+	/*--/ News owl /--*/
+	$('#new-carousel').owlCarousel({
+		loop: true,
+		margin: 30,
+		responsive: {
+			0: {  
+				items: 1,
+			},
+			769: {
+				items: 2,
+			},
+			992: {
+				items: 3,
+			}
+		}
+	});
+
+	/*--/ Testimonials owl /--*/
+	$('#testimonial-carousel').owlCarousel({
+		margin: 0,
+		autoplay: true,
+		nav: true,
+		animateOut: 'fadeOut',
+		animateIn: 'fadeInUp',
+		navText: ['<i class="ion-ios-arrow-back" aria-hidden="true"></i>', '<i class="ion-ios-arrow-forward" aria-hidden="true"></i>'],
+		autoplayTimeout: 4000,
+		autoplayHoverPause: true,
+		responsive: {
+			0: {
+				items: 1,
+			}
+		}
+	});
+
+})(jQuery);
+
+</script>
+
+
+{% endblock %}
+ 

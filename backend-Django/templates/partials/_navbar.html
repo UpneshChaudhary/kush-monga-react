@@ -1,0 +1,199 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #03396c;">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'index' %}">
+            <img src="{{ about_section.logo_image.url }}" class="logo" alt="" style="width: 70px; height: 40px;">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <ul class="navbar-nav">
+                <!-- Navigation Items -->
+                <li class="nav-item">
+                    <a class="nav-link {% if '/' == request.path %}active{% endif %} mr-3" href="{% url 'index' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if 'about' in request.path %}active{% endif %} mr-3" href="{% url 'about' %}">About</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Listed Properties
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item {% if 'listings' in request.path %}active{% endif %}" href="{% url 'listings' %}">Listing</a>
+                        <a class="dropdown-item {% if 'coming_soon' in request.path %}active{% endif %}" href="{% url 'coming_soon' %}">Coming Soon</a>
+                    </div>
+                </li>
+                
+                
+                <li class="nav-item">
+                    <a class="nav-link {% if 'sold_properties' in request.path %}active{% endif %} mr-3" href="{% url 'sold_properties' %}">Sold</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if 'blogs' in request.path %}active{% endif %} mr-3" href="{% url 'blog_list' %}">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if 'testimonials' in request.path %}active{% endif %} mr-3" href="{% url 'testimonials' %}">Testimonials</a>
+                </li>
+            </ul>
+            <div class="ms-auto">
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#appraisalModal" style="background-color: red; border-color: red; color: white; font-size: smaller;">
+                    Request Appraisal
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+
+
+<!-- Appraisal Modal -->
+<div class="modal fade" id="appraisalModal" tabindex="-1" role="dialog" aria-labelledby="appraisalModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="appraisalModalLabel">Request Appraisal</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Appraisal form -->
+                <form id="sales-appraisal" class="needs-validation" action="{% url 'appraisal' %}" method="post" style="padding: 10px;">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <h5>Your Details</h5>
+                    </div>
+                    <!-- Form Fields -->
+                    <div class="mb-3">
+                        <label for="first_name">First Name <span class="required">*</span></label>
+                        <input type="text" name="first_name" id="first_name" class="form-control" required="">
+                        <div class="invalid-feedback">
+                            Please enter your first name.
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="last_name">Last Name <span class="required">*</span></label>
+                        <input type="text" name="last_name" id="last_name" class="form-control" required="">
+                        <div class="invalid-feedback">
+                            Please enter your last name.
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone">Your Phone Number <span class="required">*</span></label>
+                        <input type="tel" name="phone" id="phone" class="form-control" required="">
+                        <div class="invalid-feedback">
+                            Please enter your phone number.
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email">Your Email Address <span class="required">*</span></label>
+                        <input type="email" name="email" id="email" class="form-control" required="" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                        <div class="invalid-feedback">
+                            Please enter your email.
+                        </div>
+                    </div>
+                    <div class="mt-5 mb-3">
+                        <h5>Property Details</h5>
+                    </div>
+                    <div class="mb-3">
+                        <label for="street-address">Property Street Address <span class="required">*</span></label>
+                        <input type="text" class="form-control" name="street_address" id="street-address" required="">
+                        <div class="invalid-feedback">
+                            Please enter your property street address.
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="suburb">Property Suburb <span class="required">*</span></label>
+                        <input type="text" class="form-control" name="suburb" id="suburb" required="">
+                        <div class="invalid-feedback">
+                            Please enter your property suburb.
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="postcode">Property Post Code <span class="required">*</span></label>
+                        <input type="text" class="form-control" name="postcode" id="postcode" required="">
+                        <div class="invalid-feedback">
+                            Please enter your property postcode.
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="state">Property State <span class="required">*</span></label>
+                        <select class="form-select" name="state" id="state" required="">
+                            <option value=""></option>
+                            <option value="ACT">ACT</option>
+                            <option value="NSW">NSW</option>
+                            <option value="NT">NT</option>
+                            <option value="QLD">QLD</option>
+                            <option value="SA">SA</option>
+                            <option value="TAS">TAS</option>
+                            <option value="VIC">VIC</option>
+                            <option value="WA">WA</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select your property state.
+                        </div>
+                    </div>
+                    <div class="mt-5 mb-3">
+                        <h5>Additional Information</h5>
+                    </div>
+                    <div class="mb-3">
+                        <label for="bedrooms">No. of Bedrooms</label>
+                        <select class="form-select" name="bedrooms" id="bedrooms">
+                            <option value=""></option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="5+">5+</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="bathrooms">No. of Bathrooms</label>
+                        <select class="form-select" name="bathrooms" id="bathrooms">
+                            <option value=""></option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="5+">5+</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cars">No. of Car Spaces</label>
+                        <select class="form-select" name="cars" id="cars">
+                            <option value=""></option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="5+">5+</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="notes">Additional Notes</label>
+                        <textarea name="notes" id="notes" rows="4" class="form-control"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3" style="background-color: red; border-color: red; color: white;">
+                        Submit Appraisal
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Script for Select Purpose -->
+<script>
+    document.getElementById('purpose').addEventListener('change', function() {
+        const selectedValue = this.value;
+        document.getElementById('selectedPurpose').value = selectedValue;
+    });
+</script>
+
+{% include 'partials/_alert.html' %}

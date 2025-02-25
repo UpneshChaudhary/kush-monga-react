@@ -1,0 +1,107 @@
+<!-- coming_soon.html -->
+
+{% extends 'base.html' %} {% load static %}
+
+
+{% load humanize %}
+
+
+{% block title %} | Coming soon {% endblock %}
+{% block content %}
+
+
+<!-- alerts -->
+{% include 'partials/_alert.html' %}
+
+<section id="showcase-innerr" class="py-5 text-white" style="background-image: url('{{ about_section.background_image2.url }}');
+background-size: cover; background-position: center; background-repeat: no-repeat; border-radius: 8px; margin-bottom: 20px; height: 200px;">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-12">
+                <h1 class="display-4">
+                    <span class="font-weight-bold">Coming Soon </span>
+                </h1>
+                
+            </div>
+        </div>
+    </div>
+</section>
+<br>
+<div class="container">
+    <div class="row">
+        {% for item in paginated_coming_soon_items %}
+        <div class="col-md-4 mb-3">
+            <div class="card" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); object-fit: cover;">
+                <div class="card-body">
+                    <div style="position: relative;">
+                        <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.title }}" style="width: 100%; height: 320px; object-fit: cover;">
+                    </div>
+                    <div class="card-body" style="color: #03396c; display: flex; flex-direction: row; align-items: center; flex-wrap: wrap;">
+                     <div style="display: flex; align-items: center; margin-right: 10px;">
+                            <i class="fas fa-bed" style="margin-right: 5px;"></i>
+                            <h4>{{ item.bedrooms }}</h4>
+                        </div>
+                        <div style="display: flex; align-items: center; margin-right: 10px;">
+                            <i class="fas fa-bath" style="margin-right: 5px;"></i>
+                            <h4>{{ item.bathrooms }}</h4>
+                        </div>
+                        <div style="display: flex; align-items: center; margin-right: 10px;">
+                            <i class="fas fa-car" style="margin-right: 5px;"></i>
+                            <h4>{{ item.carspace }}</h4>
+                        </div>
+                        <div style="width: 100%;">
+                            <!-- <h6 class="card-title">{{ item.title }}</h6>
+                            <p class="card-text">Address: {{ item.address }}</p>
+                            <p class="card-text">Area: {{ item.area }} sq. ft.</p> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            {% if paginated_coming_soon_items.has_other_pages %}
+            <ul class="pagination justify-content-center">
+                {% if paginated_coming_soon_items.has_previous %}
+                <li class="page-item">
+                    <a href="?page={{ paginated_coming_soon_items.previous_page_number }}" class="page-link">&laquo; Previous</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link">&laquo;</span>
+                </li>
+                {% endif %}
+                {% for i in paginated_coming_soon_items.paginator.page_range %}
+                {% if paginated_coming_soon_items.number == i %}
+                <li class="page-item active">
+                    <span class="page-link">{{ i }}</span>
+                </li>
+                {% else %}
+                <li class="page-item">
+                    <a href="?page={{ i }}" class="page-link">{{ i }}</a>
+                </li>
+                {% endif %}
+                {% endfor %}
+                {% if paginated_coming_soon_items.has_next %}
+                <li class="page-item">
+                    <a href="?page={{ paginated_coming_soon_items.next_page_number }}" class="page-link"> &raquo;</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link"> &raquo;</span>
+                </li>
+                {% endif %}
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

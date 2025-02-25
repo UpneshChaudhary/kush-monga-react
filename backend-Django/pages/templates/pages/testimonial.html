@@ -1,0 +1,193 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% load stars_range %}
+{% load custom_tags %}
+
+
+
+
+
+{% block title %} | Testimonials {% endblock %}
+
+{% block content %} 
+
+<section id="showcase-innerr" class="py-5 text-white" style="background-image: url('{{ about_section.background_image.url }}'); background-size: cover; background-position: center;">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <h1 class="display-4"> Feedbacks and Reviews</h1>
+          <p class="lead">
+            
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<section id="feedback" class="py-4">
+    <div class="container">
+      <div class="row">
+        {% for card in feedback_cards %}
+            <div class="col-md-4">
+                <div class="feedback-card card mb-4" style="height: 530px;">
+                    <img src="{{ card.photo.url }}" alt="{{ card.title }}" class="card-img-top card-image"  style="width: 100%; height: 250px;">
+                    <div class="card-body">
+                        <h5 class="card-title" style="color: #03396c;">{{ card.title }}</h5>
+                        <p class="card-text"><i class="fas fa-bed"></i> Bedrooms: {{ card.bedrooms }}</p>
+                        <p class="card-text"><i class="fas fa-bath"></i> Bathrooms: {{ card.bathrooms }}</p>
+                        <p class="card-text"><i class="fas fa-car"></i> Garage: {{ card.garage }}</p>
+                        <p class="card-text"> <h6>{{ card.review_title }}</h6></p>
+
+                        <div style="flex-grow: 10;"></div>
+                        <a href="{% url 'feedback_card_detail' pk=card.pk %}" class="btn btn-primary btn-block" style="background-color: #03396c; position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); max-width: 320px;">Read more</a>
+                          
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Pagination -->
+<div class="row">
+    <div class="col-md-12">
+        {% if feedback_cards.has_other_pages %}
+            <ul class="pagination">
+                {% if feedback_cards.has_previous %}
+                    <li class="page-item" >
+                        <a href="?page=1" class="page-link" >&laquo;</a>
+                    </li>
+                    <li class="page-item">
+                        <a href="?page={{ feedback_cards.previous_page_number }}" class="page-link" >Pre</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link">&laquo;</a>
+                    </li>
+                {% endif %}
+                
+                {% for i in feedback_cards.paginator.page_range %}
+                    {% if feedback_cards.number == i %}
+                        <li class="page-item active">
+                            <a class="page-link">{{ i }}</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item" >
+                            <a href="?page={{ i }}" class="page-link">{{ i }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                
+                {% if feedback_cards.has_next %}
+                    <li class="page-item">
+                        <a href="?page={{ feedback_cards.next_page_number }}" class="page-link">Next</a>
+                    </li>
+                    <li class="page-item" >
+                        <a href="?page={{ feedback_cards.paginator.num_pages }}" class="page-link">&raquo;</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" >Next</a>
+                    </li>
+                    <li class="page-item disabled">
+                        <a class="page-link" >&raquo;</a>
+                    </li>
+                {% endif %}
+            </ul>
+        {% endif %}
+    </div>
+</div>
+
+
+<section>
+    <div class="rating-section">
+        <h2 style="text-align: center;"> Leave a Rating and Review for Us</h2>
+        <div style="width: 70%; margin: 20px auto; background-color: #88a3bd; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); padding: 15px;" class="card">
+            <form method="POST" action="{% url 'submit_review' %}">
+                {% csrf_token %}
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <label style="margin-bottom: 10px;" for="rating" class="rating-input">Rating:</label>
+                    <select style="background-color: #03396c; color: #fff; padding: 10px 5px; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 10px; width: 70%;" id="rating" name="rating">
+                        <option value="1">1 star</option>
+                        <option value="2">2 stars</option>
+                        <option value="3">3 stars</option>
+                        <option value="4">4 stars</option>
+                        <option value="5">5 stars</option>
+                    </select>
+                    <label style="margin-bottom: 10px;" for="newReview">Your Review:</label>
+                    <textarea style="margin-bottom: 20px; width: 70%;" id="newReview" name="newReview" rows="4" placeholder="Enter your review here..."></textarea>
+                    <label style="margin-bottom: 10px;" for="name">Your Name:</label>
+                    <input type="text" id="name" name="name" placeholder="Your Name" style="width: 70%;">
+                    <label style="margin-bottom: 10px;" for="email">Your Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Your Email" style="width: 70%;">
+                    <button type="submit" style="background-color: #03396c; color: #fff; padding: 5px 10px; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px;" class="submit-btn">Submit Review</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+
+<section>
+    <div class="container">
+        <div class="row">
+            {% for review in text_reviews %}
+            <div class="col-md-4 mb-4">
+                <div class="card" style="min-height: 200px; background-color: #B7E2F0;">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            {% for _ in "x"|ljust:review.stars %}
+                                <i class="fas fa-star" style="color: red;"></i>
+                            {% endfor %}
+                            <br>
+                        </h5>
+                        <h6>{{ review.name }}</h6>
+                        <p class="card-text">{{ review.review }}</p>
+                    </div>
+                </div>
+            </div>
+            {% if forloop.counter1|divisibleby:3 and forloop.counter > 0 %}
+        </div>
+        <div class="row">
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    
+        <div class="text-center mt-4">
+            <button id="view-more-btn" class="btn btn-primary" style="background-color: #03396c;">View More</button>
+        </div>
+    </div>
+    <br>
+</section>
+
+<!--
+<script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let visibleRows = 4; // Initial visible rows
+            let rows = document.querySelectorAll(".row");
+            rows.forEach(function (row, index) {
+                if (index >= visibleRows) {
+                    row.style.display = "none";
+                }
+            });
+
+            document.getElementById("view-more-btn").addEventListener("click", function () {
+                visibleRows += 4; // Increase visible rows by 4
+                rows.forEach(function (row, index) {
+                    if (index < visibleRows) {
+                        row.style.display = "flex"; // Show the row
+                    }
+                });
+                if (visibleRows >= rows.length) {
+                    document.getElementById("view-more-btn").style.display = "none"; // Hide the button if there are no more rows
+                }
+            });
+        });
+    </script> -->
+
+
+{% endblock %}
+

@@ -1,0 +1,288 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta_description %}
+Explore Khush Monga's impressive journey in real estate,
+ spanning seven years of consistent recognition by the REIWA awards and
+  eight Rate My Agent certificates. Learn more about her expertise, achievements, and presence on platforms like ppre.net, REIWA, and Rate My Agent.
+   Trust Khush Monga for unparalleled real estate guidance
+{% endblock %}
+
+{% block title %} | About Us {% endblock %}
+
+{% block content %}
+
+<section id="showcase-innerr" class="py-5 text-white" style="background-image: url('{{ about_section.background_image2.url }}');
+background-size: cover; background-position: center; background-repeat: no-repeat; border-radius: 8px; margin-bottom: 20px; height: 300px;">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-12">
+                <h1 class="display-4">
+                    <span class="font-weight-bold">Khush Monga </span>
+                </h1>
+                <p class="lead">
+                    Sales Consultant
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Breadcrumb -->
+<section id="bc" class="mt-3">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'index' %}"> <i class="fas fa-home"></i> Home</a>
+                </li>
+                <li class="breadcrumb-item active">About</li>
+            </ol>
+        </nav>
+    </div>
+</section>
+
+
+<section id="team" class="py-5" style="background-color: #f8f9fa;">
+    <div class="container">
+        <div class="row text-center">
+            {% if realtors %}
+                {% for realtor in realtors %}
+                    <div class="col-md-4 text-center">
+                        <img src="{{ realtor.photo.url }}" alt="Realtor Photo" class="rounded-circle mb-4" />
+                        <h3 class="text-prima">{{ realtor.name }}</h3>
+                        <h5 class="text-muted">Sales Consultant</h5>
+                        <p class="contact-info">
+                            <i class="fas fa-phone"></i> <a href="tel:{{ realtor.phone }}" class="text-dark">{{ realtor.phone }}</a><br>
+                            <i class="fas fa-envelope"></i> <a href="mailto:{{ realtor.email }}" class="text-dark">{{ realtor.email }}</a>
+                        </p>
+                        <div class="social-links mt-4">
+                            <h5 class="text-prima"></h5>
+                            <ul class="list-inline">
+                                <li class="list-inline-item">
+                                    <a href="https://www.facebook.com/khushmongappre/" class="social-icon fb-icon">
+                                        <i class="fab fa-facebook"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="https://www.youtube.com/@teammongappre-new4252" class="social-icon yt-icon">
+                                        <i class="fab fa-youtube"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="https://www.instagram.com/teammonga.sales/" class="social-icon ig-icon">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="https://au.linkedin.com/in/khush-monga-09b668167" class="social-icon li-icon">
+                                        <i class="fab fa-linkedin"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <h5 class="text-prima mt-4">External Profiles</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="https://reiwa.com.au/real-estate-agent/khush-monga-159291-0-471602/" class="text-dark">REIWA Profile</a></li>
+                            <li><a href="https://www.baileydevine.com.au/our-team/khush-monga/" class="text-dark">Bailey Devine Profile</a></li>
+                            <li><a href="https://www.realestate.com.au/agent/khush-monga-3529404" class="text-dark">Realestate.com.au Profile</a></li>
+                            <li><a href="https://www.domain.com.au/real-estate-agent/khush-monga-1955674/" class="text-dark">Domain Profile</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="col-md-8 text-left">
+                        <h1 class="text-prima">Khush Monga</h1>
+                        <h3 class="text-secondary">Dedicated Real Estate Professional in Perth, WA</h3>
+                        <p class="description">
+                            With a wealth of experience in the local market, Khush Monga specializes in guiding clients through dynamic real estate goals and consistently delivers outstanding results across various Perth suburbs.
+                        </p>
+
+                        <h4 class="text-prima">Professional Approach</h4>
+                        <p class="description">Khush's unwavering commitment to integrity and comprehensive market knowledge makes her your trusted partner in achieving your real estate goals.</p>
+
+                        <blockquote class="blockquote">
+                            <p class="mb-0">“Success in real estate is built on a foundation of trust, dedication, and relentless pursuit of excellence.”</p>
+                        </blockquote>
+
+                        <h4 class="text-prima">Career Journey</h4>
+                        <p class="description">Khush's journey began with a degree in Business and Accounting from the University of Mississippi, followed by successful roles in financial planning and real estate.</p>
+
+                        <h4 class="text-prima">Real Estate Passion</h4>
+                        <p class="description">Khush is passionate about delivering premium customer service and building enduring relationships with clients.</p>
+
+                        <h4 class="text-prima">Awards and Recognition</h4>
+                        <ul class="list-unstyled">
+                            <li><strong>REIWA Awards:</strong>
+                                <ul class="list-disc pl-3">
+                                    <li>2023: Master Salesperson</li>
+                                    <li>2021: 26-30 Million Dollar Club Award</li>
+                                    <li>2020: 16-20 Million Dollar Club Award</li>
+                                    <li>2019: 10-15 Million Dollar Club Award</li>
+                                    <li>2018: 10-15 Million Dollar Club Award</li>
+                                    <li>2017: 6 Million Dollar Club Award</li>
+                                </ul>
+                            </li>
+                            <li><strong>Rate My Agent Awards:</strong>
+                                <ul class="list-disc pl-3">
+                                    <li>2024: Agent of the Year Suburb Winner for Piara Waters</li>
+                                    <li>2023: Agent of the Year Suburb Winner for Piara Waters and Southern Rivers</li>
+                                    <li>2022: Agent of the Year Suburb Winner for Harrisdale and Piara Waters</li>
+                                    <li>2021: Agent of the Year Suburb Winner for Southern Rivers and Harrisdale</li>
+                                    <li>2020: Agent of the Year Suburb Winner for Piara Waters</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        
+                        
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="col-md-12">
+                    <p>No realtors available</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<br>
+
+<style>
+    #team .contact-info a {
+    text-decoration: none;
+    color: #0b3862;
+    
+}
+
+#team .description {
+    color: #333;
+    font-size: 1rem;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+#team .social-links .list-inline-item {
+    margin-right: 10px;
+}
+
+#team .social-icon {
+    width: 40px;
+    height: 40px;
+    display: block;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 40px;
+    color: #fff;
+    font-size: 1.2rem;
+}
+
+.fb-icon { background-color: #3B5998; }
+.yt-icon { background-color: #FF0000; }
+.ig-icon { background-color: #B7242A; }
+.li-icon { background-color: #0077B5; }
+
+.text-prima {
+    color: #0e5aa1; /* Consistent primary color */
+}
+
+.text-secondary {
+    color: #6c757d; /* Muted secondary color */
+}
+
+
+</style>
+
+<script>
+    // Example: Toggle social links visibility
+document.addEventListener('DOMContentLoaded', function () {
+    const socialLinks = document.querySelector('.social-links');
+    // Add any interactive JavaScript if needed
+});
+
+</script>
+
+
+
+
+<!-- Awards -->
+<section class="container" style="margin-top: 20px; overflow-x: auto;">
+    <h3 class="text-center mb-3">
+        <span class="font-weight-bold">REIWA Awards</span>
+    </h3>
+
+    <div class="d-flex flex-wrap justify-content-center"> <!-- Ensure all items are centered and wrap on smaller screens -->
+        {% for award in all_awards %}
+        <div class="col-md-3 mb-3"> <!-- Adjust width as needed -->
+            <div style="border: 2px solid #3aade7; border-radius: 8px; margin: 20px; overflow: hidden;">
+                <div style="position: relative;">
+                    <img src="{{ award.image.url }}" class="d-block img-fluid" alt="{{ award.title }}">
+                    <div class="carousel-caption d-none d-md-block"></div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<style>
+/* Adjust image size for smaller screens */
+@media (max-width: 767px) {
+    .container .col-md-3 {
+        flex: 0 0 40%; /* Each column occupies 50% width on screens below 768px */
+    }
+}
+
+/* Adjust image size for extra-small screens */
+@media (max-width: 575px) {
+    .container .col-md-3 {
+        flex: 0 0 100%; /* Each column occupies 100% width on screens below 576px */
+    }
+}
+</style>
+
+
+
+<!-- Carousel for Certificates -->
+
+<section class="container" style="margin-top: 20px;">
+    <h3 class="text-center mb-3">
+        <span class="font-weight-bold">Rate My Agent Certificates</span>
+    </h3>
+
+    <div id="awardCarousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="row">
+                    {% for certificate in certificates %}
+                        <div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
+                            <div class="card" style="border: 2px solid #3aade7; border-radius: 8px; overflow: hidden;">
+                                <img src="{{ certificate.image.url }}" class="card-img-top" alt="{{ certificate.title }}" style="object-fit: cover;">
+                                
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+       <!-- <a class="carousel-control-prev" href="#awardCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#awardCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a> -->
+    </div>
+</section>
+
+<!-- Work -->
+<section id="work" class="bg-light text-grey text-center" style="margin-top:30px;">
+    <h4>
+    </h4>
+    <hr />
+    <a href="{% url 'listings' %}" class="btn btn-secondary text-white btn-lg" style="background-color: #03396c;">View Current listings for Khush</a>
+</section>
+
+{% endblock %}

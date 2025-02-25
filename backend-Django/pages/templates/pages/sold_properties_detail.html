@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+<!-- Showcase Inner -->
+<section id="showcase-innerr" class="py-5 text-white" style="background-image: url('{{ about_section.background_image2.url }}');
+background-size: cover; background-position: center; background-repeat: no-repeat; border-radius: 8px; margin-bottom: 20px; height: 250px;">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-12">
+                <h1 class="display-4"><strong>{{ sold_property.title }} </strong></h1>
+                <p class="lead">
+                    <i class="fas fa-map-marker"></i> <strong> {{ sold_property.address | safe }} </strong></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Sold Property Detail -->
+<section id="sold-property-detail" class="py-4">
+    <div class="container">
+        <a href="{% url 'sold_properties' %}" class="btn btn-light mb-4">Back To Sold Properties</a>
+        
+        <!-- Fields Section -->
+        <div class="carousel-item active">
+            <img src="{{ sold_property.image1.url }}" alt="Main Image" class="">
+        </div>
+        <div class="row mb-5 fields">
+            <div class="col-md-6">
+                
+                <!-- Left Fields -->
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item text-secondary">
+                        <i class="fas fa-money-bill-alt"></i> Sold For:
+                        <span class="float-right">{{ sold_property.price }}</span>
+                    </li>
+                    <li class="list-group-item text-secondary">
+                        <i class="fas fa-bed"></i> Bedrooms:
+                        <span class="float-right">{{ sold_property.bedrooms }}</span>
+                    </li>
+                    <li class="list-group-item text-secondary">
+                        <i class="fas fa-bath"></i> Bathrooms:
+                        <span class="float-right">{{ sold_property.bathrooms }}</span>
+                    </li>
+                    
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <!-- Right Fields -->
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item text-secondary">
+                        <i class="fas fa-th-large"></i> Area:
+                        <span class="float-right">{{ sold_property.sqft }} sq.m</span>
+                    </li>
+                    <li class="list-group-item text-secondary">
+                        <i class="fas fa-th-large"></i> Garage:
+                        <span class="float-right">{{ sold_property.garage }}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row py-2">
+            <div class="col-4">
+                <a href="{% if sold_property.floor_plan %}{{ sold_property.floor_plan }}{% endif %}" class="btn btn-success btn-block" {% if not listing.floor_plan %}disabled{% endif %}>
+                    Floor Plan
+                </a>
+            </div>
+            <div class="col-4">
+                <a href="{% if sold_property.video %}{{ sold_property.video }}{% endif %}" class="btn btn-info btn-block" {% if not listing.video %}disabled{% endif %}>
+                    Video
+                </a>
+            </div>
+        </div>
+
+        <!-- Description Section -->
+        <div class="row mb-5">
+            <div class="col-md-12" style="width: 100%; border: 2px solid #ccc; padding: 15px;">
+                <h2 style="width: 100%;">{{ sold_property.quote | safe }}</h2>
+                {{ sold_property.description | safe }}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

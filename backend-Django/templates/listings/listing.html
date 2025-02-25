@@ -1,0 +1,1241 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block title %} | {{listing.title}} {% endblock %}
+
+{% block content %}
+
+<section id="showcase-innerr" class="py-5 text-white" style="background-image: url('{{ about_section.background_image2.url }}');
+background-size: cover; background-position: center; background-repeat: no-repeat; border-radius: 8px; margin-bottom: 20px; height: 250px;">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-12">
+        <h1 class="display-4"><strong>{{ listing.title }} </strong></h1>
+        <p class="lead">
+          <i class="fas fa-map-marker"></i> <strong>{{ listing.city }} {{listing.state}}, {{listing.zipcode}} </strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="intro-single">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-lg-8">
+        <div class="title-single-box">
+          <h1 class="title-single">{{ listing.title }}</h1>
+          <span class="color-text-a">{{ listing.address }}</span>
+        </div>
+      </div>
+      <div class="col-md-12 col-lg-4">
+        <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="{% url 'index' %}">Home</a>
+            </li>
+            <li class="breadcrumb-item">
+              <a href="{% url 'listings' %}">Listings</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+              {{ listing.title }}
+            </li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>
+
+    
+
+
+    
+<!-- alerts -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--/ Property Single Star /-->
+<section class="property-single nav-arrow-b">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div id="property-single-carousel" class="owl-carousel owl-arrow gallery-property">
+          <div class="carousel-item-b">
+            <img src="{{ listing.photo_main.url }}" alt="" style="max-width: 1400px; max-height: 600px;">
+          </div>
+          <br>
+          <div class="row mb-5 thumbs">
+            {% if listing.photo_1 %}
+          <div class="col-md-2">
+            <a href="{{ listing.photo_1.url }}" data-lightbox="home-images">
+              <img src="{{ listing.photo_1.url }}" alt="" class="img-fluid">
+            </a>
+          </div>
+          {% endif %}
+          {% if listing.photo_2 %}
+          <div class="col-md-2">
+            <a href="{{ listing.photo_2.url }}" data-lightbox="home-images">
+              <img src="{{ listing.photo_2.url }}" alt="" class="img-fluid">
+            </a>
+          </div>
+          {% endif %}
+          {% if listing.photo_3 %}
+          <div class="col-md-2">
+            <a href="{{ listing.photo_3.url }}" data-lightbox="home-images">
+              <img src="{{ listing.photo_3.url }}" alt="" class="img-fluid">
+            </a>
+          </div>
+          {% endif %}
+          {% if listing.photo_4 %}
+          <div class="col-md-2">
+            <a href="{{ listing.photo_4.url }}" data-lightbox="home-images">
+              <img src="{{ listing.photo_4.url }}" alt="" class="img-fluid">
+            </a>
+          </div>
+          {% endif %}
+          {% if listing.photo_5 %}
+          <div class="col-md-2">
+            <a href="{{ listing.photo_5.url }}" data-lightbox="home-images">
+              <img src="{{ listing.photo_5.url }}" alt="" class="img-fluid">
+            </a>
+          </div>
+          {% endif %}
+          {% if listing.photo_6 %}
+          <div class="col-md-2">
+            <a href="{{ listing.photo_6.url }}" data-lightbox="home-images">
+              <img src="{{ listing.photo_6.url }}" alt="" class="img-fluid">
+            </a>
+          </div>
+          {% endif %}
+        </div>
+        <div class="row mb-5 thumbs">
+          {% if listing.photo_7 %}
+          <div class="col-md-2">
+            <a href="{{ listing.photo_7.url }}" data-lightbox="home-images">
+              <img src="{{ listing.photo_7.url }}" alt="" class="img-fluid">
+            </a>
+          </div>
+          {% endif %}
+          {% if listing.photo_8 %}
+          <div class="col-md-2">
+            <a href="{{ listing.photo_8.url }}" data-lightbox="home-images">
+              <img src="{{ listing.photo_8.url }}" alt="" class="img-fluid">
+            </a>
+          </div>
+          {% endif %}
+          {% if listing.photo_9 %}
+          <div class="col-md-2">
+            <a href="{{ listing.photo_9.url }}" data-lightbox="home-images">
+              <img src="{{ listing.photo_9.url }}" alt="" class="img-fluid">
+            </a>
+          </div>
+          {% endif %}
+          {% if listing.photo_10 %}
+          <div class="col-md-2">
+            <a href="{{ listing.photo_10.url }}" data-lightbox="home-images">
+              <img src="{{ listing.photo_10.url }}" alt="" class="img-fluid">
+            </a>
+          </div>
+          {% endif %}
+          {% if listing.photo_11 %}
+          <div class="col-md-2">
+            <a href="{{ listing.photo_11.url }}" data-lightbox="home-images">
+              <img src="{{ listing.photo_11.url }}" alt="" class="img-fluid">
+            </a>
+          </div>
+          {% endif %}
+          {% if listing.photo_12 %}
+          <div class="col-md-2">
+            <a href="{{ listing.photo_12.url }}" data-lightbox="home-images">
+              <img src="{{ listing.photo_12.url }}" alt="" class="img-fluid">
+            </a>
+          </div>
+          {% endif %}
+        </div>
+        <div class="row mb-5 thumbs">
+          {% if listing.photo_13 %}
+          <div class="col-md-2">
+            <a href="{{ listing.photo_13.url }}" data-lightbox="home-images">
+              <img src="{{ listing.photo_13.url }}" alt="" class="img-fluid">
+            </a>
+          </div>
+          {% endif %}
+          {% if listing.photo_14 %}
+          <div class="col-md-2">
+            <a href="{{ listing.photo_14.url }}" data-lightbox="home-images">
+              <img src="{{ listing.photo_14.url }}" alt="" class="img-fluid">
+            </a>
+          </div>
+          {% endif %}
+          {% if listing.photo_15 %}
+          <div class="col-md-2">
+            <a href="{{ listing.photo_15.url }}" data-lightbox="home-images">
+              <img src="{{ listing.photo_15.url }}" alt="" class="img-fluid">
+            </a>
+          </div>
+          {% endif %}
+          {% if listing.photo_16 %}
+          <div class="col-md-2">
+            <a href="{{ listing.photo_16.url }}" data-lightbox="home-images">
+              <img src="{{ listing.photo_16.url }}" alt="" class="img-fluid">
+            </a>
+          </div>
+          {% endif %}
+          {% if listing.photo_17 %}
+          <div class="col-md-2">
+            <a href="{{ listing.photo_17.url }}" data-lightbox="home-images">
+              <img src="{{ listing.photo_17.url }}" alt="" class="img-fluid">
+            </a>
+          </div>
+          {% endif %}
+          {% if listing.photo_18 %}
+          <div class="col-md-2">
+            <a href="{{ listing.photo_18.url }}" data-lightbox="home-images">
+              <img src="{{ listing.photo_18.url }}" alt="" class="img-fluid">
+            </a>
+          </div>
+          {% endif %}
+        </div>
+        </div>
+        <div class="row justify-content-between">
+          <div class="col-md-5 col-lg-4">
+            <div class="property-box" style="border: 5px solid #022c54; padding: 10px; border-radius: 0px;">
+                <div class="property-price d-flex justify-content-center foo">
+                    <div class="card-header-c d-flex">
+                        <div class="card-box-icon">
+                            <span class="ion-money"></span>
+                        </div>
+                        <div class="card-title-c align-self-center">
+                            <h5 class="title-c">{{ listing.price | safe }}</h5>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="property-summary">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="title-box-d section-t4">
+                                <h4 class="title-d">Quick Summary</h4>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="summary-list">
+                        <ul class="list">
+                            <li class="d-flex justify-content-between">
+                                <strong>Property:</strong>
+                                <span>{{ listing.title }}</span>
+                            </li>
+                            <li class="d-flex justify-content-between">
+                                <strong>Location:</strong>
+                                <span>{{ listing.address }}</span>
+                            </li>
+                            <li class="d-flex justify-content-between">
+                                <strong>Area:</strong>
+                                <span>{{ listing.sqft }} m<sup>2</sup></span>
+                            </li>
+                            <li class="d-flex justify-content-between">
+                                <strong>Beds:</strong>
+                                <span>{{ listing.bedrooms }}</span>
+                            </li>
+                            <li class="d-flex justify-content-between">
+                                <strong>Baths:</strong>
+                                <span>{{ listing.bathrooms }}</span>
+                            </li>
+                            <li class="d-flex justify-content-between">
+                                <strong>Garage:</strong>
+                                <span>{{ listing.garage }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                  </div>
+              </div>
+          </div>
+        
+          <div class="col-md-7 col-lg-7 section-md-t3">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="title-box-d">
+                  <h3 class="title-d">Property Description</h3>
+                </div>
+              </div>
+            </div>
+            <div class="property-description">
+              <p class="description color-text-a">
+                {{ listing.description| safe }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-10 offset-md-1">
+        <ul class="nav nav-pills-a nav-pills mb-3 section-t3" id="pills-tab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="pills-video-tab" data-toggle="pill" href="#pills-video" role="tab" aria-controls="pills-video" aria-selected="true">Video</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-plans-tab" data-toggle="pill" href="#pills-plans" role="tab" aria-controls="pills-plans" aria-selected="true">Floor Plans</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-map-tab" data-toggle="pill" href="#pills-map" role="tab" aria-controls="pills-map" aria-selected="false">Home Open</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-video" role="tabpanel" aria-labelledby="pills-video-tab">
+                <iframe src="{{ listing.video }}" width="100%" height="460" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+            </div>
+            <div class="tab-pane fade" id="pills-plans" role="tabpanel" aria-labelledby="pills-plans-tab">
+                {% if listing.floor_plan %}
+                    <embed src="{{ listing.floor_plan.url }}" type="application/pdf" width="100%" height="600px">
+                    <a href="{{ listing.floor_plan.url }}" target="_blank">Download Floor Plan</a>
+                {% else %}
+                    <p>No floor plan available</p>
+                {% endif %}
+            </div>
+            <div class="tab-pane fade" id="pills-map" role="tabpanel" aria-labelledby="pills-map-tab">
+              {% if home_opens %}
+                <div class="home-open-events">
+                    <h3>Upcoming Home Open:</h3>
+                    <ul class="list-group">
+                        {% for home_open in home_opens %}
+                            <li class="list-group-item">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <strong>Date:</strong> {{ home_open.date }} ({{ home_open.day }})<br>
+                                        <strong>Time:</strong> {{ home_open.start_time }} - {{ home_open.end_time }}<br>
+                                        <strong>Address:</strong> {{ home_open.address }}
+                                    </div>
+                                    <div>
+                                        <a href="https://www.google.com/calendar/render?action=TEMPLATE&text={{ home_open.title }}&dates={{ home_open.date|date:'Ymd' }}T{{ home_open.start_time|time:'His' }}/{{ home_open.date|date:'Ymd' }}T{{ home_open.end_time|time:'His' }}&details=Visit+{{ home_open.address }}+for+an+open+house.&location={{ home_open.address }}"
+                                            target="_blank" class="btn btn-primary" style="background-color: #022c54;">
+                                            Add to Calendar
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% else %}
+                <p>No upcoming home open events for this property.</p>
+            {% endif %}
+
+            </div>
+        </div>
+    </div>
+    
+
+<br>
+      <div class="col-md-12">
+        <div class="row section-t3">
+          <div class="col-sm-12">
+            <div class="title-box-d">
+              <h3 class="title-d">Send Enquiry</h3>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-lg-4">
+            <img src="{{ listing.realtor.photo.url }}" alt="" class="img-fluid">
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="property-agent">
+              <h4 class="title-agent">Khush Monga</h4>
+              <p class="color-text-a">
+                
+              </p>
+              <ul class="list-unstyled">
+                <li class="d-flex justify-content-between">
+                  <strong>Phone:</strong>
+                  <span class="color-text-a">+61 0411094249</span>
+                </li>
+                <li class="d-flex justify-content-between">
+                  <strong>Email:</strong>
+                  <span class="color-text-a">Admin@khushmonga.com</span>
+                </li>
+                <!-- <li class="d-flex justify-content-between">
+                  <strong>Skype:</strong>
+                  <span class="color-text-a">Annabela.ge</span>
+                </li> -->
+              </ul>
+              <div class="socials-a">
+                <ul class="list-inline">
+                  <li class="list-inline-item">
+                    <a href="#">
+                      <i class="fa fa-facebook" aria-hidden="true"></i>
+                    </a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="#">
+                      <i class="fa fa-twitter" aria-hidden="true"></i>
+                    </a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="#">
+                      <i class="fa fa-instagram" aria-hidden="true"></i>
+                    </a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="#">
+                      <i class="fa fa-pinterest-p" aria-hidden="true"></i>
+                    </a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="#">
+                      <i class="fa fa-dribbble" aria-hidden="true"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12 col-lg-4">
+            <div class="property-contact">
+              <form action="{% url 'contact' %}" method="POST">
+                {% csrf_token %}
+                {% if user.is_authenticated %}
+                  <input type="hidden" name="user_id" value="{{ user.id }}">
+                {% else %}
+                  <input type="hidden" name="user_id" value="0">
+                {% endif %}
+                  <input type="hidden" name="realtor_email" value="{{ listing.realtor.email }}">
+                  <input type="hidden" name="listing_id" value="{{ listing.id }}">
+                
+                <div class="form-group">
+                    <label for="property_name" class="col-form-label">Property:</label>
+                    <input type="text" name="listing" class="form-control" value="{{ listing.title }}">
+                </div>
+                <div class="form-group">
+                    <label for="name" class="col-form-label">Name:</label>
+                    <input type="text" name="name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="col-form-label">Email:</label>
+                    <input type="email" name="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone" class="col-form-label">Phone:</label>
+                    <input type="text" name="phone" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="message" class="col-form-label">Message:</label>
+                    <textarea name="message" class="form-control"></textarea>
+                </div>
+                <hr>
+                <input type="submit" value="Send" class="btn btn-block btn-secondary">
+              </form>
+            </div>
+          </div>
+          
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+
+
+
+
+
+<style>
+
+  
+/*------/ Property Single /-----*/
+
+.gallery-property {
+  margin-bottom: 3rem;
+}
+
+.property-price {
+  margin: 0 auto;
+}
+
+.property-price .card-header-c {
+  padding: 0;
+}
+
+.summary-list {
+  padding-right: 1rem;
+  color: #000000;
+}
+
+.summary-list .list {
+  padding: 0;
+  line-height: 2;
+}
+
+.summary-list .list span {
+  color: #555555;
+}
+
+.property-agent .title-agent {
+  font-weight: 600;
+}
+
+.property-agent ul {
+  line-height: 2;
+  color: #000000;
+}
+
+.property-agent .socials-a {
+  text-align: center;
+}
+
+  /*======================================
+//--//-->   FORM INPUT
+======================================*/
+
+.form-a #sendmessage {
+  color: #03396c;
+  border: 1px solid #03396c;
+  display: none;
+  text-align: center;
+  padding: 15px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.form-a #errormessage {
+  color: red;
+  display: none;
+  border: 1px solid red;
+  text-align: center;
+  padding: 15px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.form-a #sendmessage.show,
+.form-a #errormessage.show,
+.form-a .show {
+  display: block;
+}
+
+.form-a .validation {
+  color: red;
+  display: none;
+  margin: 4px 0 20px 0;
+  font-weight: 400;
+  font-size: 13px;
+}
+
+.form-a label {
+  color: #000000;
+  position: relative;
+}
+
+.form-a select.form-control-lg:not([size]):not([multiple]) {
+  height: 3.5rem;
+}
+
+.form-a .form-control {
+  border-radius: 0;
+  font-size: 1.1rem;
+  font-weight: 300;
+}
+
+.form-a .form-control.form-control-a {
+  height: 3.5rem;
+}
+
+.form-a .form-control:focus {
+  box-shadow: none;
+  border-color: #03396c;
+}
+
+/*------/ Owl carousel /------*/
+
+.owl-theme .owl-dots {
+  text-align: center;
+  margin-top: 18px;
+}
+
+.owl-theme .owl-dots .owl-dot {
+  display: inline-block;
+}
+
+.owl-theme .owl-dots .owl-dot span {
+  width: 16px;
+  height: 9px;
+  margin: 5px 5px;
+  background: #000000;
+  border: 0px solid #000000;
+  display: block;
+  transition: all 0.6s ease-in-out;
+  cursor: pointer;
+  border-radius: 0px;
+}
+
+.owl-theme .owl-dots .owl-dot:hover span {
+  background-color: #03396c;
+}
+
+.owl-theme .owl-dots .owl-dot.active span {
+  background-color: #03396c;
+  width: 35px;
+}
+
+.owl-arrow .owl-nav {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 1.8rem;
+}
+
+.owl-arrow .owl-nav .owl-prev,
+.owl-arrow .owl-nav .owl-next {
+  display: inline-block;
+  transition: all 0.6s ease-in-out;
+  color: #000000;
+}
+
+.owl-arrow .owl-nav .owl-prev.disabled,
+.owl-arrow .owl-nav .owl-next.disabled {
+  transition: all 0.6s ease-in-out;
+  color: #adadad;
+}
+
+.owl-arrow .owl-nav .owl-next {
+  margin-left: 15px;
+}
+
+.nav-arrow-a .owl-arrow .owl-nav {
+  font-size: 1.8rem;
+  margin-top: -110px;
+}
+
+.nav-arrow-a .owl-arrow .owl-nav .owl-next {
+  margin-left: 15px;
+}
+
+.nav-arrow-b .owl-arrow .owl-nav {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 1.2rem;
+}
+
+.nav-arrow-b .owl-arrow .owl-nav .owl-prev,
+.nav-arrow-b .owl-arrow .owl-nav .owl-next {
+  padding: .7rem 1.5rem !important;
+  display: inline-block;
+  transition: all 0.6s ease-in-out;
+  color: #ffffff;
+  background-color: #03396c;
+  opacity: .9;
+}
+
+.nav-arrow-b .owl-arrow .owl-nav .owl-prev.disabled,
+.nav-arrow-b .owl-arrow .owl-nav .owl-next.disabled {
+  transition: all 0.6s ease-in-out;
+  color: #ffffff;
+}
+
+.nav-arrow-b .owl-arrow .owl-nav .owl-prev:hover,
+.nav-arrow-b .owl-arrow .owl-nav .owl-next:hover {
+  background-color: #03396c;
+}
+
+.nav-arrow-b .owl-arrow .owl-nav .owl-next {
+  margin-left: 0px;
+}
+
+
+/*======================================
+//--//-->   BUTTON
+======================================*/
+
+.btn {
+  transition: .5s ease;
+}
+
+.btn.btn-a,
+.btn.btn-b {
+  border-radius: 0;
+  padding: 1rem 3rem;
+  letter-spacing: .05rem;
+}
+
+.btn.btn-a {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.btn.btn-a:hover {
+  background-color: #03396c;
+  color: #000000;
+}
+
+.btn.btn-b {
+  background-color: #03396c;
+  color: #000000;
+}
+
+.btn.btn-b:hover {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.btn.btn-b-n {
+  background-color: #03396c;
+  color: #ffffff;
+  border-radius: 0;
+}
+
+.btn.btn-b-n:hover {
+  background-color: #03396c;
+  color: #ffffff;
+}
+
+@media (min-width: 576px) {
+  .intro .intro-title {
+    font-size: 3.5rem;
+  }
+
+  .intro .intro-subtitle.intro-price {
+    font-size: 1.3rem;
+  }
+
+  .about-img-box {
+    padding-left: 4rem;
+  }
+
+  .sinse-box {
+    padding: 1.5rem 2.5rem;
+    bottom: 20px;
+  }
+
+  .sinse-box .sinse-title {
+    font-size: 1.3rem;
+  }
+
+  .sinse-box p {
+    font-size: .8rem;
+  }
+
+  .sinse-box p {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .link-a {
+    font-size: .9rem;
+  }
+
+  .link-a span {
+    font-size: 1.5rem;
+  }
+
+  .navbar-default.navbar-trans .nav-item,
+  .navbar-default.navbar-reduce .nav-item {
+    margin-left: 15px;
+  }
+
+  .navbar-default .dropdown .dropdown-menu {
+    border-top: 4px solid #03396c;
+    border-left: 0;
+    display: block;
+    position: absolute;
+    box-shadow: 0 2px rgba(17, 16, 15, 0.1), 0 2px 10px rgba(20, 19, 18, 0.1);
+  }
+
+  .box-collapse {
+    width: 50%;
+  }
+
+  .intro .owl-theme .owl-dots {
+    right: 200px;
+  }
+
+  .intro .intro-body {
+    padding-left: 2rem;
+  }
+
+  .intro .intro-title-top {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .intro .intro-title {
+    font-size: 4rem;
+  }
+
+  .intro .intro-subtitle {
+    font-size: 2.5rem;
+  }
+
+  .intro .intro-subtitle.intro-price {
+    padding-top: 2rem;
+    font-size: 1.5rem;
+  }
+
+  .intro-single .title-single-box .title-single {
+    font-size: 2.1rem;
+  }
+
+  .grid .card-box-a,
+  .grid .card-box-b,
+  .grid .card-box-c,
+  .grid .card-box-d {
+    margin-bottom: 2.5rem;
+  }
+
+  .card-box-a:hover .img-a,
+  .card-box-a:hover .img-b,
+  .card-box-b:hover .img-a,
+  .card-box-b:hover .img-b {
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+  }
+
+  .card-box-a .price-a,
+  .card-box-b .price-a {
+    font-size: .9rem;
+  }
+
+  .card-box-a:hover .card-overlay-a-content {
+    bottom: 60px;
+  }
+
+  .card-box-a:hover .card-body-a {
+    padding-bottom: 1rem;
+  }
+
+  .card-overlay-a-content {
+    bottom: -20px;
+  }
+
+  .card-header-a .card-title-a {
+    font-size: 1.3rem;
+  }
+
+  .card-info .card-info-title {
+    font-size: .9rem;
+  }
+
+  .card-info li span {
+    font-size: .8rem;
+  }
+
+  .card-header-b {
+    bottom: 0px;
+  }
+
+  .card-header-b .title-2 {
+    font-size: 1rem;
+  }
+
+  .card-header-b .date-b {
+    font-size: .9rem;
+  }
+
+  .box-comments .list-comments .comment-author {
+    font-size: 1.5rem;
+  }
+
+  .title-c {
+    font-size: 1.8rem;
+  }
+
+  .card-box-d .card-overlay-hover {
+    padding: 5px 15px 5px 10px;
+  }
+
+  .card-box-d .title-d {
+    font-size: 1.1rem;
+    margin: .5rem 0;
+  }
+
+  .card-box-d .content-d {
+    font-size: .8rem;
+    margin: .5rem 0;
+  }
+
+  .card-box-d .card-body-d p {
+    margin-bottom: 8px;
+    font-size: .8rem;
+  }
+
+  .about-img-box {
+    padding-left: 5rem;
+  }
+
+  .sinse-box {
+    padding: 1.5rem 3rem;
+  }
+
+  .sinse-box .sinse-title {
+    font-size: 1.8rem;
+  }
+}
+
+@media (min-width: 768px) and (min-width: 768px) {
+  .card-box-a:hover .card-overlay-a-content {
+    bottom: 60px;
+  }
+}
+
+@media (min-width: 768px) and (min-width: 992px) {
+  .card-box-a:hover .card-overlay-a-content {
+    bottom: 64px;
+  }
+}
+
+@media (min-width: 992px) {
+  .link-a {
+    font-size: 1rem;
+  }
+
+  .link-a span {
+    font-size: 18px;
+  }
+
+  .list-a li {
+    width: 33.333%;
+  }
+
+  .intro .intro-title-top {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .intro .intro-title {
+    font-size: 4.5rem;
+  }
+
+  .intro .intro-subtitle.intro-price {
+    padding-top: 3rem;
+  }
+
+  .intro-single .title-single-box .title-single {
+    font-size: 2.5rem;
+  }
+
+  .card-box-a .price-a,
+  .card-box-b .price-a {
+    font-size: 1rem;
+  }
+
+  .card-overlay-a-content {
+    bottom: 0px;
+  }
+
+  .card-header-a .card-title-a {
+    font-size: 2rem;
+  }
+
+  .card-info .card-info-title {
+    font-size: 1rem;
+  }
+
+  .card-info li span {
+    font-size: 1rem;
+  }
+
+  .card-header-b {
+    bottom: 20px;
+  }
+
+  .card-header-b .title-2 {
+    font-size: 1.6rem;
+  }
+
+  .card-header-b .date-b {
+    font-size: 1rem;
+  }
+
+  .title-c {
+    font-size: 2.5rem;
+  }
+
+  .card-box-d .card-overlay-hover {
+    padding: 5px 40px 5px 35px;
+  }
+
+  .card-box-d .title-d {
+    font-size: 1.5rem;
+    margin: 1rem 0;
+  }
+
+  .card-box-d .card-body-d p {
+    margin-bottom: 12px;
+    font-size: 1rem;
+  }
+
+  .sinse-box {
+    padding: 3rem 4.5rem;
+  }
+
+  .sinse-box .sinse-title {
+    font-size: 2.2rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .card-box-d .card-overlay-hover {
+    padding: 15px 40px 5px 35px;
+  }
+
+  .card-box-d .title-d {
+    font-size: 2rem;
+    margin: 1rem 0;
+  }
+}
+
+@media (max-width: 991px) {
+  .property-contact {
+    margin-top: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .back-to-top {
+    bottom: 15px;
+  }
+}
+
+@media (max-width: 767px) {
+  .text-brand {
+    font-size: 1.8rem;
+  }
+
+  .section-t8 {
+    padding-top: 4rem;
+  }
+
+  .section-t4 {
+    padding-top: 2rem;
+  }
+
+  .section-md-t3 {
+    padding-top: 3rem;
+  }
+
+  .section-tb85 {
+    padding: 4rem 0 2.5rem 0;
+  }
+
+  .intro-single {
+    padding-top: 9rem;
+  }
+
+  .card-box-a,
+  .card-box-b,
+  .card-box-c,
+  .card-box-d {
+    margin-bottom: 2.5rem;
+  }
+
+  .card-box-a .card-overlay-a-content {
+    bottom: 65px;
+  }
+
+  .card-box-a .card-body-a {
+    padding-bottom: 1rem;
+  }
+
+  .property-agent {
+    margin-top: 2.5rem;
+  }
+
+  .card-box-c {
+    margin-bottom: 2rem;
+  }
+
+  .card-body-c {
+    padding: 0;
+  }
+}
+
+@media (max-width: 575px) {
+  .box-collapse .title-box-d {
+    left: 35px;
+  }
+
+  .box-collapse .title-box-d .title-d {
+    font-size: 1.3rem;
+  }
+}
+
+
+
+
+
+</style>
+
+<script>
+  (function ($) {
+  "use strict";
+  
+  // Preloader
+  $(window).on('load', function () {
+    if ($('#preloader').length) {
+      $('#preloader').delay(100).fadeOut('slow', function () {
+        $(this).remove();
+      });
+    }
+  });
+
+  // Back to top button
+  $(window).scroll(function() {
+    if ($(this).scrollTop() > 100) {
+      $('.back-to-top').fadeIn('slow');
+    } else {
+      $('.back-to-top').fadeOut('slow');
+    }
+  });
+  $('.back-to-top').click(function(){
+    $('html, body').animate({scrollTop : 0},1500, 'easeInOutExpo');
+    return false;
+  });
+  
+	var nav = $('nav');
+	var navHeight = nav.outerHeight();
+
+	/*--/ ScrollReveal /Easy scroll animations for web and mobile browsers /--*/
+	window.sr = ScrollReveal();
+	sr.reveal('.foo', { duration: 1000, delay: 15 });
+
+	/*--/ Carousel owl /--*/
+	$('#carousel').owlCarousel({
+		loop: true,
+		margin: -1,
+		items: 1,
+		nav: true,
+		navText: ['<i class="ion-ios-arrow-back" aria-hidden="true"></i>', '<i class="ion-ios-arrow-forward" aria-hidden="true"></i>'],
+		autoplay: true,
+		autoplayTimeout: 3000,
+		autoplayHoverPause: true
+	});
+
+	/*--/ Animate Carousel /--*/
+	$('.intro-carousel').on('translate.owl.carousel', function () {
+		$('.intro-content .intro-title').removeClass('zoomIn animated').hide();
+		$('.intro-content .intro-price').removeClass('fadeInUp animated').hide();
+		$('.intro-content .intro-title-top, .intro-content .spacial').removeClass('fadeIn animated').hide();
+	});
+
+	$('.intro-carousel').on('translated.owl.carousel', function () {
+		$('.intro-content .intro-title').addClass('zoomIn animated').show();
+		$('.intro-content .intro-price').addClass('fadeInUp animated').show();
+		$('.intro-content .intro-title-top, .intro-content .spacial').addClass('fadeIn animated').show();
+	});
+
+	/*--/ Navbar Collapse /--*/
+	$('.navbar-toggle-box-collapse').on('click', function () {
+		$('body').removeClass('box-collapse-closed').addClass('box-collapse-open');
+	});
+	$('.close-box-collapse, .click-closed').on('click', function () {
+		$('body').removeClass('box-collapse-open').addClass('box-collapse-closed');
+		$('.menu-list ul').slideUp(700);
+	});
+
+	/*--/ Navbar Menu Reduce /--*/
+	$(window).trigger('scroll');
+	$(window).bind('scroll', function () {
+		var pixels = 50;
+		var top = 1200;
+		if ($(window).scrollTop() > pixels) {
+			$('.navbar-default').addClass('navbar-reduce');
+			$('.navbar-default').removeClass('navbar-trans');
+		} else {
+			$('.navbar-default').addClass('navbar-trans');
+			$('.navbar-default').removeClass('navbar-reduce');
+		}
+		if ($(window).scrollTop() > top) {
+			$('.scrolltop-mf').fadeIn(1000, "easeInOutExpo");
+		} else {
+			$('.scrolltop-mf').fadeOut(1000, "easeInOutExpo");
+		}
+	});
+
+	/*--/ Property owl /--*/
+	$('#property-carousel').owlCarousel({
+		loop: true,
+		margin: 30,
+		responsive: {
+			0: {
+				items: 1,
+			},
+			769: {
+				items: 2,
+			},
+			992: {
+				items: 3,
+			}
+		}
+	});
+
+	/*--/ Property owl owl /--*/
+	$('#property-single-carousel').owlCarousel({
+		loop: true,
+		margin: 0,  
+		nav: true,
+		navText: ['<i class="ion-ios-arrow-back" aria-hidden="true"></i>', '<i class="ion-ios-arrow-forward" aria-hidden="true"></i>'],
+		responsive: {
+			0: {
+				items: 1,
+			}
+		}
+	});
+
+	/*--/ News owl /--*/
+	$('#new-carousel').owlCarousel({
+		loop: true,
+		margin: 30,
+		responsive: {
+			0: {  
+				items: 1,
+			},
+			769: {
+				items: 2,
+			},
+			992: {
+				items: 3,
+			}
+		}
+	});
+
+	/*--/ Testimonials owl /--*/
+	$('#testimonial-carousel').owlCarousel({
+		margin: 0,
+		autoplay: true,
+		nav: true,
+		animateOut: 'fadeOut',
+		animateIn: 'fadeInUp',
+		navText: ['<i class="ion-ios-arrow-back" aria-hidden="true"></i>', '<i class="ion-ios-arrow-forward" aria-hidden="true"></i>'],
+		autoplayTimeout: 4000,
+		autoplayHoverPause: true,
+		responsive: {
+			0: {
+				items: 1,
+			}
+		}
+	});
+
+})(jQuery);
+
+</script>
+{% endblock %}
+
+
+
+
